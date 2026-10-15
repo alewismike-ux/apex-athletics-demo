@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d1c">
+  <meta name="description" content="Apex Athletics is a demonstration track athlete portfolio website built by ML Web Dev.">
+  <title>Apex Athletics | Athlete Portfolio Demo</title>
+  <style>
+    :root{--bg:#080d1c;--panel:#111b30;--muted:#9daec4;--white:#f7faff;--blue:#5cdbff;--purple:#a78bfa;--line:rgba(205,226,255,.14)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:86px}
+    body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.65}
+    a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}
+    .wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:10;background:rgba(8,13,28,.91);border-bottom:1px solid var(--line);backdrop-filter:blur(16px)}
+    .nav{min-height:75px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .brand{font-weight:900;letter-spacing:.12em;white-space:nowrap}.brand strong{color:var(--blue)}
+    .links{display:flex;gap:26px;align-items:center;color:#d6e4f8;font-size:.92rem;font-weight:600}
+    .links a:hover,.links a:focus-visible{color:var(--blue)}
+    .menu{display:none;border:1px solid var(--line);border-radius:10px;background:#14213b;color:white;padding:8px 12px}
+    .tag{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--blue)}
+    .tag:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 14px var(--blue)}
+    .hero{position:relative;isolation:isolate;overflow:hidden;min-height:565px;display:grid;align-items:center;background:radial-gradient(ellipse at 67% 43%,#183e7288,transparent 44%),radial-gradient(ellipse at 12% 10%,#5542a340,transparent 35%),#080d1c}
+    .hero .wrap{display:grid;grid-template-columns:1.06fr .94fr;align-items:center;gap:30px;padding-top:85px;padding-bottom:85px}
+    h1{font-size:clamp(3.6rem,7.1vw,6.4rem);line-height:1.02;letter-spacing:-.065em;margin:20px 0 24px;font-weight:900}
+    .accent{color:var(--blue);text-shadow:0 0 38px #51caff45}
+    .hero p{font-size:1.1rem;max-width:510px;color:#b0c2dc}
+    .buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{border:1px solid #5be1ff40;border-radius:9px;padding:13px 21px;font-weight:800;font-size:.91rem;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .2s,background .2s}
+    .btn:hover,.btn:focus-visible{transform:translateY(-3px)}
+    .btn.primary{color:#071322;background:var(--blue);box-shadow:0 8px 35px #36cfff36}
+    .btn.ghost{background:#192640;color:#e5f7ff}
+    .illustration{position:relative;height:360px;display:grid;place-items:center}
+    .rays{position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,#54c9ff2d,transparent 67%);filter:blur(4px)}
+    .track{position:absolute;width:min(420px,100%);height:285px;border:20px solid #4d91c599;border-radius:50%;transform:perspective(500px) rotateX(58deg) rotate(-22deg);box-shadow:0 0 40px #2cb9fc3b,inset 0 0 25px #3eaeff3b}
+    .track:before,.track:after{content:"";position:absolute;inset:20px;border:2px solid #b9efff88;border-radius:50%}
+    .track:after{inset:48px}
+    .illustration .number{z-index:1;font-size:clamp(100px,15vw,175px);font-style:italic;letter-spacing:-.12em;font-weight:1000;background:linear-gradient(145deg,#fff,#6fe6ff,#809eff);background-clip:text;color:transparent;text-shadow:0 0 80px #51d3ff24;transform:skew(-9deg)}
+    .illustration .under{position:absolute;z-index:2;bottom:40px;right:0;font-size:.71rem;letter-spacing:.21em;font-weight:900;color:#aad4f3;background:#101e35c7;padding:10px 14px;border:1px solid var(--line);border-radius:5px}
+    .note{background:#131e35;border:1px solid #44678a;color:#e4f0ff;padding:12px 17px;border-radius:10px;font-size:.84rem;margin-top:27px;max-width:515px}
+    section{padding:88px 0}
+    .section-head{margin-bottom:30px}.section-head h2{font-size:clamp(2rem,4vw,3rem);line-height:1.18;letter-spacing:-.045em;margin:10px 0}.section-head p{color:var(--muted);max-width:660px;margin:0}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:linear-gradient(145deg,#182844,#101829);border:1px solid var(--line);padding:27px;border-radius:17px;transition:transform .2s,border-color .2s}
+    .card:hover{transform:translateY(-4px);border-color:#77d9ff8a}
+    .card h3{margin:10px 0;font-size:1.3rem}.card p{margin:0;color:var(--muted);font-size:.95rem}
+    .card .big{color:var(--blue);font-size:2rem;font-weight:900;letter-spacing:-.04em}
+    .card .small{color:var(--purple);font-weight:800;letter-spacing:.12em;font-size:.73rem}
+    .about{background:#0c1527}.about-flex{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+    .quote{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:900;line-height:1.3;letter-spacing:-.04em;border-left:4px solid var(--blue);padding-left:24px}
+    .timeline{display:grid;gap:13px}
+    .timeline-item{background:#151f35;border:1px solid var(--line);border-radius:12px;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .timeline-item strong{font-size:.92rem}.timeline-item span{color:var(--muted);font-size:.86rem}
+    .contact{background:radial-gradient(ellipse at 60% 50%,#303f7b55,transparent 58%),#0b1124;text-align:center}
+    .contact p{margin:15px auto 24px;max-width:650px;color:var(--muted)}
+    footer{border-top:1px solid var(--line);padding:24px 0;color:#98acc7;font-size:.84rem}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    @media(max-width:800px){.hero .wrap,.about-flex{grid-template-columns:1fr}.hero .wrap{padding-top:60px}.illustration{height:260px}.track{width:300px;height:210px}.illustration .number{font-size:125px}.grid3{grid-template-columns:1fr}.links{display:none;position:absolute;top:75px;left:0;right:0;padding:20px;background:#0f1a30;flex-direction:column;border-bottom:1px solid var(--line)}.links.open{display:flex}.menu{display:block}}
+    @media(max-width:400px){.wrap{width:min(1120px,calc(100% - 28px))}.illustration .under{right:2px}h1{font-size:3.25rem}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="wrap nav" aria-label="Main navigation">
+      <a class="brand" href="#home">APEX <strong>ATHLETICS</strong></a>
+      <button class="menu" id="menu" aria-controls="nav-links" aria-expanded="false">☰ Menu</button>
+      <div class="links" id="nav-links">
+        <a href="#home">Home</a><a href="#events">Events</a><a href="#about">About</a><a href="#schedule">Schedule</a><a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap">
+        <div>
+          <span class="tag">Sample athlete portfolio</span>
+          <h1>BUILT<br>FOR <span class="accent">SPEED.</span></h1>
+          <p>A bold portfolio concept for a competitive sprinter. Show events, tell an athlete's story, and keep visitors updated—all in one clean website.</p>
+          <div class="buttons">
+            <a class="btn primary" href="#events">Explore Events ↗</a>
+            <a class="btn ghost" href="#about">Athlete Story ↓</a>
+          </div>
+          <p class="note"><strong>DEMO PROJECT:</strong> This is a fictional portfolio made to demonstrate web design skills. It does not represent a real athlete or team.</p>
+        </div>
+        <div class="illustration" aria-label="Decorative running track illustration" role="img">
+          <div class="rays"></div><div class="track"></div><div class="number">01</div><div class="under">CHASE EVERY SECOND</div>
+        </div>
+      </div>
+    </section>
+    <section id="events">
+      <div class="wrap">
+        <div class="section-head"><span class="tag">Sprint events</span><h2>Every second <span class="accent">counts.</span></h2><p>Simple cards help visitors quickly understand which events the athlete competes in.</p></div>
+        <div class="grid3">
+          <article class="card"><div class="small">EXPLOSIVE STARTS</div><div class="big">100M</div><h3>Pure Speed</h3><p>A showcase space for acceleration, starts, and short sprint results.</p></article>
+          <article class="card"><div class="small">CURVE + STRAIGHT</div><div class="big">200M</div><h3>Speed Endurance</h3><p>Feature meet performances and personal progress through the season.</p></article>
+          <article class="card"><div class="small">ONE LAP</div><div class="big">400M</div><h3>Strength & Rhythm</h3><p>Highlight race strategy, preparation, and milestone performances.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="about" id="about"><div class="wrap about-flex"><div><span class="tag">Athlete bio section</span><div class="section-head"><h2>Progress is the <span class="accent">mission.</span></h2><p>This section could feature an athlete's background, goals, team, and training philosophy. Replace this demo text only when the real athlete has approved what to share publicly.</p></div><a class="btn ghost" href="#schedule">See Example Schedule →</a></div><div class="quote">“Show up. Put in the work. Keep moving forward.”</div></div></section>
+    <section id="schedule"><div class="wrap"><div class="section-head"><span class="tag">Demo schedule</span><h2>Season <span class="accent">highlights.</span></h2><p>Example events only. No real dates, locations, or commitments are listed.</p></div><div class="timeline"><div class="timeline-item"><strong>Preseason preparation</strong><span>Sample milestone</span></div><div class="timeline-item"><strong>First competition</strong><span>Sample milestone</span></div><div class="timeline-item"><strong>Championship goals</strong><span>Sample milestone</span></div></div></div></section>
+    <section class="contact" id="contact"><div class="wrap"><span class="tag">Project showcase</span><div class="section-head"><h2>Designed to <span class="accent">stand out.</span></h2><p>This demonstration was created by ML Web Dev. No personal contact information or payment forms are included.</p></div><a class="btn primary" href="#home">Back to Top ↑</a></div></section>
+  </main>
+  <footer><div class="wrap"><span>© <span id="year">2026</span> Apex Athletics · Demo site by ML Web Dev</span><span>HTML · CSS · JavaScript</span></div></footer>
+  <script>
+    const menu=document.getElementById('menu');
+    const links=document.getElementById('nav-links');
+    menu.addEventListener('click',()=>{
+      const open=links.classList.toggle('open');
+      menu.setAttribute('aria-expanded',String(open));
+    });
+    links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+      links.classList.remove('open');menu.setAttribute('aria-expanded','false');
+    }));
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
