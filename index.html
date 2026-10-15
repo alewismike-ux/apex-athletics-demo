@@ -19,6 +19,9 @@
     .return-strip span{font-size:.83rem;color:#9bb5d4}
     .return-link{display:inline-flex;align-items:center;gap:8px;color:#72dfff;font-size:.9rem;font-weight:800}
     .return-link:hover,.return-link:focus-visible{color:white;text-decoration:underline}
+    .portfolio-floating-link{position:fixed;right:18px;bottom:18px;z-index:1000;display:inline-flex;align-items:center;gap:8px;background:#47d4ff;color:#061425;font-size:.9rem;font-weight:900;padding:14px 18px;border:2px solid #a9f0ff;border-radius:999px;box-shadow:0 9px 30px #27c8ff55;text-decoration:none;max-width:calc(100vw - 36px)}
+    .portfolio-floating-link:hover,.portfolio-floating-link:focus-visible{background:white;color:#061425;transform:translateY(-2px)}
+    @media(max-width:480px){.portfolio-floating-link{right:12px;bottom:12px;font-size:.8rem;padding:11px 14px}}
     .nav{min-height:75px;display:flex;justify-content:space-between;align-items:center;gap:20px}
     .brand{font-weight:900;letter-spacing:.12em;white-space:nowrap}.brand strong{color:var(--blue)}
     .links{display:flex;gap:26px;align-items:center;color:#d6e4f8;font-size:.92rem;font-weight:600}
@@ -111,6 +114,7 @@
     <section id="schedule"><div class="wrap"><div class="section-head"><span class="tag">Season roadmap</span><h2>Season <span class="accent">highlights.</span></h2><p>Every stage of the season brings a new opportunity to improve.</p></div><div class="timeline"><div class="timeline-item"><strong>Build the foundation</strong><span>Preparation</span></div><div class="timeline-item"><strong>Develop speed and technique</strong><span>Progress</span></div><div class="timeline-item"><strong>Bring it to race day</strong><span>Competition</span></div></div></div></section>
     <section class="contact" id="contact"><div class="wrap"><span class="tag">Keep moving forward</span><div class="section-head"><h2>Designed to <span class="accent">stand out.</span></h2><p>Driven by discipline. Defined by progress. Designed by ML Web Dev.</p></div><a class="btn primary" href="#home">Back to Top ↑</a></div></section>
   </main>
+  <a class="portfolio-floating-link" href="https://alewismike-ux.github.io/ml-web-dev-futuristic/" aria-label="Go back to ML Web Dev portfolio">← Back to ML Web Dev</a>
   <footer><div class="wrap"><span>© <span id="year">2026</span> Apex Athletics · Designed by ML Web Dev</span><a class="return-link" href="https://alewismike-ux.github.io/ml-web-dev-futuristic/">← Back to ML Web Dev</a></div></footer>
   <script>
     const menu=document.getElementById('menu');
